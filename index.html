@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transformateur de lien HTML</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Code Cleaner</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
-        <div id="code-container">
-            <h2>Entrez le lien href :</h2>
-            <div class="input-container">
-                <input type="text" id="input-link" class="input-link" placeholder="Entrez votre lien href ici">
-                <button class="button" onclick="applyTransformations()">Transformer & copier</button>
-            </div>
-            <h2>Résultat après transformations :</h2>
+        <h1>Créez votre sondage</h1>
+        <div class="input-section">
+            <label for="input-link">Lien href :</label>
+            <input type="text" id="input-link" placeholder="Entrez votre lien href...">
+            <label for="question">Question :</label>
+            <input type="text" id="question" placeholder="Entrez votre question...">
+            <button class="button" onclick="applyTransformations()">Générer & copier</button>
+        </div>
+        <div class="output-section">
+            <h2>Résultat :</h2>
             <div id="output-code"></div>
         </div>
-
-        <div class="popup" id="popup-message">
-            <span class="popup-message">Le code a été copié dans le presse-papiers.</span>
-        </div>
     </div>
-    
+    <div id="popup-message" class="popup-message">Code copié</div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -2,58 +2,38 @@ function applyTransformations() {
     // Récupération du lien href depuis la zone de texte
     var inputLink = document.getElementById("input-link").value;
 
+    // Récupération de la question depuis la zone de texte
+    var question = document.getElementById("question").value;
+
     // Supprimer l'information aid= si elle est présente dans le lien
     var cleanLink = cleanAidParameter(inputLink);
 
-    // Application des transformations
-    var transformedCode = applyModifications(cleanLink);
-
-    // Copier le contenu HTML du code transformé dans le presse-papiers
-    copyToClipboard(transformedCode);
+    // Application des transformations avec la question personnalisée
+    var transformedCode = applyModifications(cleanLink, question);
 
     // Affichage du code transformé
     document.getElementById("output-code").innerHTML = transformedCode;
 
+    // Copier le contenu HTML de output-code dans le presse-papiers
+    var outputCode = document.getElementById("output-code").outerHTML;
+    copyToClipboard(outputCode);
 
     // Afficher un message en popup
     var popupMessage = document.getElementById("popup-message");
-    popupMessage.style.display = "block";
+    popupMessage.classList.add("active");
     setTimeout(function() {
-        popupMessage.style.display = "none";
-    }, 5000); // Disparition après 5 secondes
+        popupMessage.classList.remove("active");
+        popupMessage.classList.add("hide");
+    }, 1000); // Disparition après 1 seconde
 }
 
-function copyToClipboard(text) {
-    var tempInput = document.createElement("textarea");
-    tempInput.style.position = "absolute";
-    tempInput.style.left = "-1000px";
-    tempInput.style.top = "-1000px";
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-}
-
-function cleanAidParameter(link) {
-    // Vérifier si le paramètre aid= est présent dans le lien
-    var indexOfAid = link.indexOf("&aid=");
-    if (indexOfAid !== -1) {
-        // Si le paramètre aid= est trouvé, supprimer cette partie du lien
-        return link.substring(0, indexOfAid);
-    } else {
-        // Si le paramètre aid= n'est pas trouvé, retourner le lien tel quel
-        return link;
-    }
-}
-
-function applyModifications(link) {
+function applyModifications(link, question) {
     var code = `
     <link href="https://surveys-static.survicate.com/fonts/fonts.css" rel="stylesheet">
     <div style="margin: auto; max-width: 600px; font-family: 'Helvetica', sans-serif;">
         <div style="padding-bottom: 10px;">
             <div style="padding-bottom: 10px; max-width: 500px; margin: auto; font-size: 18px; color: #29292a; text-align: center; line-height: 30px;">
-                Qu'avez-vous pensé de cette web-matinale ?
+                ${question}
             </div>
         </div>
         <div style="text-align: center; margin: 0 auto;">
@@ -90,6 +70,32 @@ function applyModifications(link) {
 
     return code;
 }
+
+
+function copyToClipboard(text) {
+    var tempInput = document.createElement("textarea");
+    tempInput.style.position = "absolute";
+    tempInput.style.left = "-1000px";
+    tempInput.style.top = "-1000px";
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+}
+
+function cleanAidParameter(link) {
+    // Vérifier si le paramètre aid= est présent dans le lien
+    var indexOfAid = link.indexOf("&aid=");
+    if (indexOfAid !== -1) {
+        // Si le paramètre aid= est trouvé, supprimer cette partie du lien
+        return link.substring(0, indexOfAid);
+    } else {
+        // Si le paramètre aid= n'est pas trouvé, retourner le lien tel quel
+        return link;
+    }
+}
+
 
 function getBackgroundColor(i) {
     if (i <= 3) return "#f13a29";

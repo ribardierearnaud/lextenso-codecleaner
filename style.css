@@ -1,51 +1,108 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f3f3f3;
+}
+
 .container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-section {
+    margin-bottom: 20px;
+}
+
+.input-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-section input {
     width: 100%;
-    max-width: 800px; /* Ajustez la largeur maximale selon vos besoins */
-    margin: 0 auto; /* Pour centrer horizontalement */
-    text-align: center; /* Pour centrer le contenu textuel */
-}
-
-.input-container {
-    display: inline-block;
+    padding: 8px;
     margin-bottom: 10px;
-    text-align: center; /* Pour centrer le contenu de la zone de saisie */
-}
-
-.input-link {
-    height: 38px; /* Ajustez la hauteur selon votre préférence */
-    padding: 0 10px;
-    font-size: 14px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .button {
-    height: 38px; /* Même hauteur que la zone de saisie */
-    padding: 0 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
+    display: inline-block;
+    background-color: #e8c507;
     border: none;
-    border-radius: 4px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
     cursor: pointer;
+    border-radius: 12px;
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #7cbe1d;
+    color: white;
 }
 
-.popup {
+
+
+.output-section {
+    margin-top: 20px;
+}
+
+#popup-message {
     position: fixed;
-    top: 400px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4CAF50;
-    color: white;
+    background-color: #4caf50;
+    color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     display: none;
 }
 
-.popup-message {
-    font-size: 16px;
+#popup-message.active {
+    display: block;
+    animation: popup-animation 2s forwards;
+}
+
+#popup-message.hide {
+    animation: hide-popup-animation 2s forwards;
+}
+
+@keyframes popup-animation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes hide-popup-animation {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
 }
