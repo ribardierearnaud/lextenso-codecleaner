@@ -15,8 +15,7 @@ function applyTransformations() {
     document.getElementById("output-code").innerHTML = transformedCode;
 
     // Copier le contenu HTML de output-code dans le presse-papiers
-    var outputCode = document.getElementById("output-code").outerHTML;
-    copyToClipboard(outputCode);
+    copyToClipboard(transformedCode);
 
     // Afficher un message en popup
     var popupMessage = document.getElementById("popup-message");
